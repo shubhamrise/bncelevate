@@ -86,14 +86,14 @@ export const DeliverablesSection: React.FC = () => {
             return (
               <div
                 key={idx}
-                className="card-reflection p-6 rounded-2xl bg-sky-50/30 border border-sky-100 hover:border-[#b58b42]/40 hover:bg-white hover:shadow-md transition-all duration-300 flex flex-col justify-between"
+                className="card-reflection p-6 rounded-2xl bg-white border border-slate-200/90 shadow-xl hover:border-[#b58b42] hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">
                     <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${isGoldAccent ? 'bg-amber-100 text-[#b58b42]' : 'bg-sky-100 text-sky-800'}`}>
                       <Icon className="w-5 h-5" />
                     </div>
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-white border border-sky-100 text-slate-700 shadow-2xs">
+                    <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-slate-100 border border-slate-200 text-slate-700 shadow-2xs">
                       {item.tag}
                     </span>
                   </div>

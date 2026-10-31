@@ -67,7 +67,7 @@ export const EligibilityCalculator: React.FC<EligibilityCalculatorProps> = ({
         </div>
 
         {/* Pathway Breakdown Card */}
-        <div className="p-8 rounded-3xl bg-sky-50/30 border border-sky-100 shadow-sm">
+        <div className="p-8 rounded-3xl bg-white border border-slate-200/90 shadow-2xl">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Column 1: Entry & Requirements */}
             <div className="space-y-4">

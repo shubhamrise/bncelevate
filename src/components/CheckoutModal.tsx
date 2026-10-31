@@ -211,52 +211,52 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
 
               {/* Add-ons */}
               <div>
-                <label className="block text-xs font-bold text-slate-800 uppercase tracking-wider mb-2">
+                <label className="block text-xs font-black text-slate-900 uppercase tracking-wider mb-2.5">
                   Optional Candidate Add-ons
                 </label>
-                <div className="space-y-2">
-                  <label className="flex items-center justify-between p-3.5 rounded-xl bg-slate-50/90 border border-slate-200 cursor-pointer hover:bg-sky-50/50 transition-colors">
-                    <div className="flex items-center gap-3">
+                <div className="space-y-2.5">
+                  <label className="flex items-center justify-between p-4 rounded-2xl bg-slate-50 border-2 border-slate-200 hover:border-sky-600 hover:bg-sky-50/40 cursor-pointer transition-all shadow-xs">
+                    <div className="flex items-center gap-3.5">
                       <input
                         type="checkbox"
                         checked={printedBooks}
                         onChange={(e) => setPrintedBooks(e.target.checked)}
-                        className="w-4 h-4 rounded text-sky-700 focus:ring-sky-600"
+                        className="w-5 h-5 rounded text-sky-700 accent-sky-700 focus:ring-sky-600 cursor-pointer"
                       />
                       <div>
-                        <div className="text-sm font-bold text-slate-900">
+                        <div className="text-sm font-black text-slate-950">
                           Physical Printed Test Bank & Reference Binder
                         </div>
-                        <div className="text-xs text-slate-600 mt-0.5">
+                        <div className="text-xs font-semibold text-slate-700 mt-0.5">
                           {activePackageId === 'basic'
                             ? `Doorstep express courier across India (${currency === 'INR' ? '₹4,500' : '$55'})`
                             : 'Included Free with Premium & Premium Plus cohorts'}
                         </div>
                       </div>
                     </div>
-                    <span className="text-xs font-extrabold text-emerald-700 whitespace-nowrap">
+                    <span className="text-xs font-black text-emerald-800 bg-emerald-100/80 px-2.5 py-1 rounded-lg border border-emerald-300 whitespace-nowrap">
                       {activePackageId === 'basic' ? (currency === 'INR' ? '+₹4,500' : '+$55') : 'INCLUDED'}
                     </span>
                   </label>
 
-                  <label className="flex items-center justify-between p-3.5 rounded-xl bg-slate-50/90 border border-slate-200 cursor-pointer hover:bg-sky-50/50 transition-colors">
-                    <div className="flex items-center gap-3">
+                  <label className="flex items-center justify-between p-4 rounded-2xl bg-slate-50 border-2 border-slate-200 hover:border-sky-600 hover:bg-sky-50/40 cursor-pointer transition-all shadow-xs">
+                    <div className="flex items-center gap-3.5">
                       <input
                         type="checkbox"
                         checked={oneOnOneMentoring}
                         onChange={(e) => setOneOnOneMentoring(e.target.checked)}
-                        className="w-4 h-4 rounded text-sky-700 focus:ring-sky-600"
+                        className="w-5 h-5 rounded text-sky-700 accent-sky-700 focus:ring-sky-600 cursor-pointer"
                       />
                       <div>
-                        <div className="text-sm font-bold text-slate-900">
+                        <div className="text-sm font-black text-slate-950">
                           1-on-1 Faculty Mentorship & Mock Interview
                         </div>
-                        <div className="text-xs text-slate-600 mt-0.5">
+                        <div className="text-xs font-semibold text-slate-700 mt-0.5">
                           Personalized resume audit & audit interview preparation with Senior Audit Partner
                         </div>
                       </div>
                     </div>
-                    <span className="text-xs font-extrabold text-sky-800 whitespace-nowrap">
+                    <span className="text-xs font-black text-sky-900 bg-sky-100/80 px-2.5 py-1 rounded-lg border border-sky-300 whitespace-nowrap">
                       {currency === 'INR' ? '+₹8,000' : '+$100'}
                     </span>
                   </label>
@@ -264,16 +264,16 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
               </div>
 
               {/* Order Summary Footnote */}
-              <div className="p-4 rounded-2xl bg-sky-50/60 border border-sky-100 flex items-center justify-between">
+              <div className="p-4 rounded-2xl bg-slate-100 border-2 border-slate-200 flex items-center justify-between shadow-xs">
                 <div>
-                  <span className="text-xs font-semibold text-slate-600">Estimated Total:</span>
-                  <div className="text-2xl font-black text-slate-950">
+                  <span className="text-xs font-black text-slate-700 uppercase tracking-wider">Estimated Total:</span>
+                  <div className="text-3xl font-black text-slate-950 tracking-tight">
                     {currency === 'INR' ? `₹${finalTotal.toLocaleString('en-IN')}` : `$${finalTotal}`}
                   </div>
                 </div>
                 <button
                   onClick={() => setStep(2)}
-                  className="btn-reflection inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-gradient-to-r from-sky-700 via-sky-800 to-[#b58b42] hover:from-sky-800 hover:to-[#9e7735] text-white font-bold text-sm shadow-md shadow-sky-800/25 transition-all cursor-pointer"
+                  className="btn-reflection inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-sky-700 via-sky-800 to-[#b58b42] hover:from-sky-800 hover:to-[#9e7735] text-white font-black text-sm shadow-md shadow-sky-800/25 transition-all cursor-pointer"
                 >
                   <span>Continue to Details</span>
                   <ArrowRight className="w-4 h-4" />
@@ -406,88 +406,88 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
 
               {/* Payment Schedule */}
               <div>
-                <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
+                <label className="block text-xs font-black text-slate-900 uppercase tracking-wider mb-2">
                   Payment Structure
                 </label>
                 <div className="grid grid-cols-2 gap-3">
                   <div
                     onClick={() => setPaymentPlan('full')}
-                    className={`p-3 rounded-2xl border cursor-pointer ${
+                    className={`p-3 rounded-2xl border-2 cursor-pointer transition-all ${
                       paymentPlan === 'full'
-                        ? 'bg-amber-50/60 border-[#b58b42] ring-2 ring-[#b58b42]/20'
-                        : 'bg-white border-sky-100'
+                        ? 'bg-amber-50/70 border-[#b58b42] ring-2 ring-[#b58b42]/20 shadow-xs'
+                        : 'bg-white border-slate-200 hover:border-slate-300'
                     }`}
                   >
-                    <div className="text-sm font-bold text-slate-900">Full Upfront Payment</div>
-                    <div className="text-xs text-slate-500">Unlock instant LMS credentials</div>
+                    <div className="text-sm font-black text-slate-950">Full Upfront Payment</div>
+                    <div className="text-xs text-slate-700 font-medium">Unlock instant LMS credentials</div>
                   </div>
                   <div
                     onClick={() => setPaymentPlan('emi')}
-                    className={`p-3 rounded-2xl border cursor-pointer ${
+                    className={`p-3 rounded-2xl border-2 cursor-pointer transition-all ${
                       paymentPlan === 'emi'
-                        ? 'bg-amber-50/60 border-[#b58b42] ring-2 ring-[#b58b42]/20'
-                        : 'bg-white border-sky-100'
+                        ? 'bg-amber-50/70 border-[#b58b42] ring-2 ring-[#b58b42]/20 shadow-xs'
+                        : 'bg-white border-slate-200 hover:border-slate-300'
                     }`}
                   >
-                    <div className="text-sm font-bold text-slate-900">2-Part Zero-Cost Installments</div>
-                    <div className="text-xs text-slate-500">50% today, 50% after 30 days</div>
+                    <div className="text-sm font-black text-slate-950">2-Part Zero-Cost Installments</div>
+                    <div className="text-xs text-slate-700 font-medium">50% today, 50% after 30 days</div>
                   </div>
                 </div>
               </div>
 
               {/* Payment Methods */}
               <div>
-                <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
+                <label className="block text-xs font-black text-slate-900 uppercase tracking-wider mb-2">
                   Select Payment Method
                 </label>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                   <button
                     type="button"
                     onClick={() => setPaymentMethod('upi')}
-                    className={`p-3 rounded-xl border flex flex-col items-center gap-1.5 cursor-pointer ${
+                    className={`p-3 rounded-xl border-2 flex flex-col items-center gap-1.5 cursor-pointer transition-all ${
                       paymentMethod === 'upi'
-                        ? 'bg-amber-50/70 border-amber-500 text-amber-800 font-bold'
-                        : 'bg-white border-sky-100 text-slate-600 hover:text-slate-900'
+                        ? 'bg-amber-50 border-amber-500 text-amber-950 font-bold shadow-xs'
+                        : 'bg-white border-slate-200 text-slate-700 hover:text-slate-950 hover:border-slate-300'
                     }`}
                   >
                     <QrCode className="w-5 h-5 text-[#b58b42]" />
-                    <span className="text-xs">UPI / QR Code</span>
+                    <span className="text-xs font-bold">UPI / QR Code</span>
                   </button>
                   <button
                     type="button"
                     onClick={() => setPaymentMethod('card')}
-                    className={`p-3 rounded-xl border flex flex-col items-center gap-1.5 cursor-pointer ${
+                    className={`p-3 rounded-xl border-2 flex flex-col items-center gap-1.5 cursor-pointer transition-all ${
                       paymentMethod === 'card'
-                        ? 'bg-amber-50/70 border-amber-500 text-amber-800 font-bold'
-                        : 'bg-white border-sky-100 text-slate-600 hover:text-slate-900'
+                        ? 'bg-amber-50 border-amber-500 text-amber-950 font-bold shadow-xs'
+                        : 'bg-white border-slate-200 text-slate-700 hover:text-slate-950 hover:border-slate-300'
                     }`}
                   >
                     <CreditCard className="w-5 h-5 text-[#b58b42]" />
-                    <span className="text-xs">Card (Debit/Credit)</span>
+                    <span className="text-xs font-bold">Card (Debit/Credit)</span>
                   </button>
                   <button
                     type="button"
                     onClick={() => setPaymentMethod('netbanking')}
-                    className={`p-3 rounded-xl border flex flex-col items-center gap-1.5 cursor-pointer ${
+                    className={`p-3 rounded-xl border-2 flex flex-col items-center gap-1.5 cursor-pointer transition-all ${
                       paymentMethod === 'netbanking'
-                        ? 'bg-amber-50/70 border-amber-500 text-amber-800 font-bold'
-                        : 'bg-white border-sky-100 text-slate-600 hover:text-slate-900'
+                        ? 'bg-amber-50 border-amber-500 text-amber-950 font-bold shadow-xs'
+                        : 'bg-white border-slate-200 text-slate-700 hover:text-slate-950 hover:border-slate-300'
                     }`}
                   >
-                    <Building className="w-5 h-5 text-sky-600" />
-                    <span className="text-xs">Net Banking</span>
+                    <Building className="w-5 h-5 text-sky-700" />
+                    <span className="text-xs font-bold">Net Banking</span>
                   </button>
                   <button
                     type="button"
                     onClick={() => setPaymentMethod('wire')}
-                    className={`p-3 rounded-xl border flex flex-col items-center gap-1.5 cursor-pointer ${
+                    className={`p-3 rounded-xl border-2 flex flex-col items-center gap-1.5 cursor-pointer transition-all ${
                       paymentMethod === 'wire'
-                        ? 'bg-amber-50/70 border-amber-500 text-amber-800 font-bold'
-                        : 'bg-white border-sky-100 text-slate-600 hover:text-slate-900'
+                        ? 'bg-amber-50 border-amber-500 text-amber-950 font-bold shadow-xs'
+                        : 'bg-white border-slate-200 text-slate-700 hover:text-slate-950 hover:border-slate-300'
                     }`}
                   >
-                    <Clock className="w-5 h-5 text-sky-600" />
-                    <span className="text-xs">NEFT / Wire</span>
+                    <Clock className="w-5 h-5 text-sky-700" />
+                    <span className="text-xs font-bold">NEFT / Wire</span>
                   </button>
                 </div>
               </div>

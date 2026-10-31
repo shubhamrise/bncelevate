@@ -138,7 +138,7 @@ export const ExamBlueprintSection: React.FC<ExamBlueprintSectionProps> = ({
                 {currentPart.domains.map((domain, index) => (
                   <div
                     key={index}
-                    className="p-4 rounded-2xl bg-sky-50/30 border border-sky-100 hover:border-amber-200 transition-colors"
+                    className="p-4 rounded-2xl bg-slate-50 border border-slate-200 hover:border-amber-300 hover:bg-amber-50/30 transition-colors"
                   >
                     <div className="flex items-center justify-between gap-4 mb-2">
                       <div className="font-bold text-slate-900 text-sm">
