@@ -41,16 +41,7 @@ export const InquiryModal: React.FC<InquiryModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm overflow-y-auto">
-      <div className="relative w-full max-w-lg my-8 bg-white border border-sky-100 rounded-3xl shadow-2xl overflow-hidden text-slate-800">
-        {/* Subtle Architectural Accent in Modal */}
-        <div className="absolute inset-0 pointer-events-none z-0">
-          <img
-            src="/hero-bg.jpg"
-            alt="BNC Architectural Background"
-            className="w-full h-full object-cover object-center opacity-[0.06] filter saturate-[0.8]"
-          />
-          <div className="absolute inset-0 bg-white/95"></div>
-        </div>
+      <div className="relative w-full max-w-lg my-8 bg-white border border-sky-100 rounded-3xl shadow-2xl overflow-hidden text-slate-900">
         <div className="relative z-10 flex items-center justify-between px-6 py-4 bg-gradient-to-r from-sky-50/70 via-white to-amber-50/50 border-b border-sky-100">
           <div>
             <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-100 text-[#b58b42] text-[10px] font-bold tracking-wide mb-1">
@@ -59,19 +50,19 @@ export const InquiryModal: React.FC<InquiryModalProps> = ({
             <h3 className="text-lg font-black text-slate-900 tracking-tight">
               Speak with a Senior CIA® Faculty Counselor
             </h3>
-            <p className="text-xs text-slate-500">
+            <p className="text-xs text-slate-600 font-medium">
               Get personalized syllabus guidance, eligibility review & fee breakdown
             </p>
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-slate-400 hover:text-slate-800 hover:bg-slate-100 transition-colors cursor-pointer"
+            className="p-1.5 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-colors cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
-        <div className="p-6">
+        <div className="relative z-10 p-6 bg-white text-slate-900">
           {submitted ? (
             <div className="py-8 text-center space-y-4">
               <div className="w-14 h-14 rounded-full bg-amber-50 border border-amber-200 text-[#b58b42] flex items-center justify-center mx-auto shadow-sm">

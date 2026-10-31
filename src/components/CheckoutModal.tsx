@@ -112,18 +112,9 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm overflow-y-auto">
-      <div className="relative w-full max-w-3xl my-8 bg-white border border-slate-200 rounded-3xl shadow-2xl overflow-hidden text-slate-800">
-        {/* Subtle Architectural Accent */}
-        <div className="absolute inset-0 pointer-events-none z-0">
-          <img
-            src="/hero-bg.jpg"
-            alt="BNC Background"
-            className="w-full h-full object-cover object-center opacity-[0.05] filter saturate-[0.8]"
-          />
-          <div className="absolute inset-0 bg-white/95"></div>
-        </div>
+      <div className="relative w-full max-w-3xl my-8 bg-white border border-slate-200 rounded-3xl shadow-2xl overflow-hidden text-slate-900">
         {/* Modal Header */}
-        <div className="relative z-10 flex items-center justify-between px-6 py-4 bg-sky-50/50 border-b border-sky-100">
+        <div className="relative z-10 flex items-center justify-between px-6 py-4 bg-sky-50/70 border-b border-sky-100">
           <div className="flex items-center gap-3">
             <span className="p-2 rounded-xl bg-amber-100 text-[#b58b42]">
               <ShieldCheck className="w-5 h-5" />
@@ -132,14 +123,14 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
               <h3 className="text-lg font-bold text-slate-900 tracking-tight">
                 {step === 4 ? 'Enrollment Confirmed!' : 'BNC Global · Student Enrollment Checkout'}
               </h3>
-              <p className="text-xs text-slate-500">
+              <p className="text-xs text-slate-600 font-medium">
                 Official Certified Internal Auditor (CIA®) Training Program
               </p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-slate-400 hover:text-slate-800 hover:bg-slate-200/50 transition-colors cursor-pointer"
+            className="p-1.5 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-slate-200/50 transition-colors cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
@@ -147,24 +138,24 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
 
         {/* Step Progress Indicator */}
         {step !== 4 && (
-          <div className="grid grid-cols-3 border-b border-sky-100 text-xs font-semibold">
+          <div className="relative z-10 grid grid-cols-3 border-b border-sky-100 text-xs font-semibold bg-white">
             <div
-              className={`py-2.5 text-center transition-colors ${
-                step >= 1 ? 'bg-sky-50 text-sky-900 border-b-2 border-[#b58b42]' : 'text-slate-400'
+              className={`py-3 text-center transition-colors ${
+                step >= 1 ? 'bg-sky-50 text-sky-950 font-bold border-b-2 border-[#b58b42]' : 'text-slate-500'
               }`}
             >
               1. Choose Package
             </div>
             <div
-              className={`py-2.5 text-center transition-colors ${
-                step >= 2 ? 'bg-sky-50 text-sky-900 border-b-2 border-[#b58b42]' : 'text-slate-400'
+              className={`py-3 text-center transition-colors ${
+                step >= 2 ? 'bg-sky-50 text-sky-950 font-bold border-b-2 border-[#b58b42]' : 'text-slate-500'
               }`}
             >
               2. Student Profile
             </div>
             <div
-              className={`py-2.5 text-center transition-colors ${
-                step >= 3 ? 'bg-sky-50 text-sky-900 border-b-2 border-[#b58b42]' : 'text-slate-400'
+              className={`py-3 text-center transition-colors ${
+                step >= 3 ? 'bg-sky-50 text-sky-950 font-bold border-b-2 border-[#b58b42]' : 'text-slate-500'
               }`}
             >
               3. Secure Payment
@@ -172,12 +163,12 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
           </div>
         )}
 
-        <div className="p-6">
+        <div className="relative z-10 p-6 bg-white text-slate-900">
           {/* STEP 1: Package Selection */}
           {step === 1 && (
             <div className="space-y-6">
               <div>
-                <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
+                <label className="block text-xs font-bold text-slate-800 uppercase tracking-wider mb-2">
                   Select Training Tier
                 </label>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-2.5">
@@ -220,52 +211,52 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
 
               {/* Add-ons */}
               <div>
-                <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
+                <label className="block text-xs font-bold text-slate-800 uppercase tracking-wider mb-2">
                   Optional Candidate Add-ons
                 </label>
                 <div className="space-y-2">
-                  <label className="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-200 cursor-pointer hover:bg-slate-100/70 transition-colors">
+                  <label className="flex items-center justify-between p-3.5 rounded-xl bg-slate-50/90 border border-slate-200 cursor-pointer hover:bg-sky-50/50 transition-colors">
                     <div className="flex items-center gap-3">
                       <input
                         type="checkbox"
                         checked={printedBooks}
                         onChange={(e) => setPrintedBooks(e.target.checked)}
-                        className="w-4 h-4 rounded text-blue-600 focus:ring-blue-500"
+                        className="w-4 h-4 rounded text-sky-700 focus:ring-sky-600"
                       />
                       <div>
-                        <div className="text-sm font-semibold text-slate-900">
+                        <div className="text-sm font-bold text-slate-900">
                           Physical Printed Test Bank & Reference Binder
                         </div>
-                        <div className="text-xs text-slate-500">
+                        <div className="text-xs text-slate-600 mt-0.5">
                           {activePackageId === 'basic'
                             ? `Doorstep express courier across India (${currency === 'INR' ? '₹4,500' : '$55'})`
                             : 'Included Free with Premium & Premium Plus cohorts'}
                         </div>
                       </div>
                     </div>
-                    <span className="text-xs font-bold text-emerald-700">
+                    <span className="text-xs font-extrabold text-emerald-700 whitespace-nowrap">
                       {activePackageId === 'basic' ? (currency === 'INR' ? '+₹4,500' : '+$55') : 'INCLUDED'}
                     </span>
                   </label>
 
-                  <label className="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-200 cursor-pointer hover:bg-slate-100/70 transition-colors">
+                  <label className="flex items-center justify-between p-3.5 rounded-xl bg-slate-50/90 border border-slate-200 cursor-pointer hover:bg-sky-50/50 transition-colors">
                     <div className="flex items-center gap-3">
                       <input
                         type="checkbox"
                         checked={oneOnOneMentoring}
                         onChange={(e) => setOneOnOneMentoring(e.target.checked)}
-                        className="w-4 h-4 rounded text-blue-600 focus:ring-blue-500"
+                        className="w-4 h-4 rounded text-sky-700 focus:ring-sky-600"
                       />
                       <div>
-                        <div className="text-sm font-semibold text-slate-900">
+                        <div className="text-sm font-bold text-slate-900">
                           1-on-1 Faculty Mentorship & Mock Interview
                         </div>
-                        <div className="text-xs text-slate-500">
+                        <div className="text-xs text-slate-600 mt-0.5">
                           Personalized resume audit & audit interview preparation with Senior Audit Partner
                         </div>
                       </div>
                     </div>
-                    <span className="text-xs font-bold text-blue-800">
+                    <span className="text-xs font-extrabold text-sky-800 whitespace-nowrap">
                       {currency === 'INR' ? '+₹8,000' : '+$100'}
                     </span>
                   </label>
@@ -273,10 +264,10 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
               </div>
 
               {/* Order Summary Footnote */}
-              <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-between">
+              <div className="p-4 rounded-2xl bg-sky-50/60 border border-sky-100 flex items-center justify-between">
                 <div>
-                  <span className="text-xs text-slate-500">Estimated Total:</span>
-                  <div className="text-2xl font-black text-slate-900">
+                  <span className="text-xs font-semibold text-slate-600">Estimated Total:</span>
+                  <div className="text-2xl font-black text-slate-950">
                     {currency === 'INR' ? `₹${finalTotal.toLocaleString('en-IN')}` : `$${finalTotal}`}
                   </div>
                 </div>
