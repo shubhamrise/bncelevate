@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Send, CheckCircle2, Phone, Mail, User, GraduationCap, Building2 } from 'lucide-react';
+import { X, Send, CheckCircle2, Phone, Mail, User, GraduationCap, Building2, Clock } from 'lucide-react';
 
 interface InquiryModalProps {
   isOpen: boolean;
@@ -19,24 +19,58 @@ export const InquiryModal: React.FC<InquiryModalProps> = ({
   const [qualification, setQualification] = useState("Bachelor's Degree");
   const [packageInterest, setPackageInterest] = useState(defaultPackage);
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const subject = encodeURIComponent(`CIA Admission Inquiry from ${name}`);
-    const bodyText = encodeURIComponent(
-      `Name: ${name}\nPhone: ${phone}\nEmail: ${email}\nCollege/Firm: ${collegeOrFirm}\nQualification: ${qualification}\nProgram Interest: ${packageInterest}\n\nSubmitted via Portal Inquiry to elevate@bncglobal.in.`
-    );
+    setIsSubmitting(true);
+
+    // Store inquiry in local storage
     try {
-      const mailtoLink = document.createElement('a');
-      mailtoLink.href = `mailto:elevate@bncglobal.in?subject=${subject}&body=${bodyText}`;
-      mailtoLink.target = '_blank';
-      mailtoLink.click();
+      const existing = JSON.parse(localStorage.getItem('bnc_inquiries') || '[]');
+      existing.unshift({
+        name,
+        email,
+        phone,
+        collegeOrFirm,
+        qualification,
+        packageInterest,
+        targetEmail: 'elevate@bncglobal.in',
+        submittedAt: new Date().toISOString(),
+      });
+      localStorage.setItem('bnc_inquiries', JSON.stringify(existing));
     } catch (err) {
-      console.log('Mail client prompt', err);
+      console.log('Inquiry storage error', err);
     }
-    setSubmitted(true);
+
+    try {
+      await fetch('https://formsubmit.co/ajax/elevate@bncglobal.in', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          _subject: `[BNC ELEVATE] Consultation Request: ${name}`,
+          _template: 'table',
+          _captcha: 'false',
+          'Candidate Name': name,
+          'Phone / WhatsApp': phone,
+          'Email Address': email,
+          'College or Current Firm': collegeOrFirm || 'Not provided',
+          'Highest Qualification': qualification,
+          'Program of Interest': packageInterest,
+          'Submission Timestamp': new Date().toLocaleString(),
+        }),
+      });
+    } catch (err) {
+      console.warn('Inquiry dispatch error', err);
+    } finally {
+      setIsSubmitting(false);
+      setSubmitted(true);
+    }
   };
 
   return (
@@ -192,10 +226,20 @@ export const InquiryModal: React.FC<InquiryModalProps> = ({
               <div className="pt-2">
                 <button
                   type="submit"
-                  className="btn-reflection w-full inline-flex items-center justify-center gap-2 py-3 rounded-xl bg-gradient-to-r from-sky-700 via-sky-800 to-[#b58b42] hover:from-sky-800 hover:to-[#9e7735] text-white font-bold text-sm shadow-lg shadow-sky-800/25 hover:shadow-[#b58b42]/30 transition-all cursor-pointer"
+                  disabled={isSubmitting}
+                  className="btn-reflection w-full inline-flex items-center justify-center gap-2 py-3 rounded-xl bg-gradient-to-r from-sky-700 via-sky-800 to-[#b58b42] hover:from-sky-800 hover:to-[#9e7735] text-white font-bold text-sm shadow-lg shadow-sky-800/25 hover:shadow-[#b58b42]/30 transition-all cursor-pointer disabled:opacity-75"
                 >
-                  <Send className="w-4 h-4" />
-                  <span>Request Callback & Free Syllabus PDF</span>
+                  {isSubmitting ? (
+                    <>
+                      <Clock className="w-4 h-4 animate-spin" />
+                      <span>Transmitting Inquiry...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-4 h-4" />
+                      <span>Request Callback & Free Syllabus PDF</span>
+                    </>
+                  )}
                 </button>
               </div>
 

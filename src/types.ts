@@ -67,7 +67,7 @@ export interface EnrollmentOrder {
   studentEmail: string;
   studentPhone: string;
   qualification: string;
-  paymentMethod: string;
+  paymentMethod?: string;
   createdAt: string;
   addOns: {
     printedBooks: boolean;

@@ -147,7 +147,7 @@ export default function App() {
                 onClick={() => handleOpenCheckout('premium')}
                 className="btn-reflection inline-flex items-center gap-2 px-8 py-3.5 rounded-xl font-bold text-sm text-sky-950 bg-white hover:bg-sky-50 shadow-xl shadow-sky-900/30 transform hover:-translate-y-0.5 transition-all cursor-pointer"
               >
-                <span>Enroll in Premium Cohort</span>
+                <span>Enroll Now</span>
                 <ArrowRight className="w-4 h-4 text-[#b58b42]" />
               </button>
               <button

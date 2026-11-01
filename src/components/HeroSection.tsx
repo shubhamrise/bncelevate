@@ -44,28 +44,51 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   const [enquirySubmitted, setEnquirySubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleEnquirySubmit = (e: React.FormEvent) => {
+  const handleEnquirySubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    const subject = encodeURIComponent(`CIA Admission Enquiry from ${enquiryName}`);
-    const bodyText = encodeURIComponent(
-      `Name: ${enquiryName}\nPhone/WhatsApp: ${enquiryPhone}\nEmail: ${enquiryEmail}\nQualification/Background: ${enquiryQualification}\nPreferred Program: ${enquiryProgram}\n\nSubmitted via First Page Enquiry Form to elevate@bncglobal.in.`
-    );
-
     try {
-      const mailtoLink = document.createElement('a');
-      mailtoLink.href = `mailto:elevate@bncglobal.in?subject=${subject}&body=${bodyText}`;
-      mailtoLink.target = '_blank';
-      mailtoLink.click();
+      const existing = JSON.parse(localStorage.getItem('bnc_hero_enquiries') || '[]');
+      existing.unshift({
+        enquiryName,
+        enquiryPhone,
+        enquiryEmail,
+        enquiryQualification,
+        enquiryProgram,
+        targetEmail: 'elevate@bncglobal.in',
+        submittedAt: new Date().toISOString(),
+      });
+      localStorage.setItem('bnc_hero_enquiries', JSON.stringify(existing));
     } catch (err) {
-      console.log('Mail client prompt', err);
+      console.log('Enquiry storage error', err);
     }
 
-    setTimeout(() => {
+    try {
+      await fetch('https://formsubmit.co/ajax/elevate@bncglobal.in', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          _subject: `[BNC ELEVATE] Quick CIA Enquiry: ${enquiryName}`,
+          _template: 'table',
+          _captcha: 'false',
+          'Enquiry Name': enquiryName,
+          'Phone / WhatsApp': enquiryPhone,
+          'Email Address': enquiryEmail,
+          'Educational Qualification': enquiryQualification,
+          'Preferred Program': enquiryProgram,
+          'Submission Date': new Date().toLocaleString(),
+        }),
+      });
+    } catch (err) {
+      console.warn('Enquiry dispatch error', err);
+    } finally {
       setIsSubmitting(false);
       setEnquirySubmitted(true);
-    }, 350);
+    }
   };
 
   const scrollTo = (id: string) => {
@@ -104,13 +127,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         {/* =============================================================== */}
         <div className="text-center max-w-5xl lg:max-w-6xl mx-auto mb-10">
           {/* Top Elite Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/90 border border-sky-400/30 text-[11px] font-bold text-slate-200 shadow-lg backdrop-blur-md uppercase tracking-wider mb-5">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/95 border border-sky-400/40 text-[11px] font-bold text-white shadow-lg backdrop-blur-md uppercase tracking-wider mb-5">
             <span className="w-2.5 h-2.5 rounded-full bg-[#f1bd5b] animate-pulse shadow-[0_0_10px_#f1bd5b]"></span>
-            <span className="text-slate-400 font-semibold">BNC GLOBAL CONSULTECH</span>
-            <span className="text-sky-400">·</span>
-            <span className="text-sky-300 font-bold">ESTD. 2014</span>
-            <span className="text-amber-400">·</span>
-            <span className="text-[#f1bd5b] font-extrabold">CIA® EXECUTIVE ACCELERATOR</span>
+            <span className="text-white font-black tracking-wider">BNC GLOBAL CONSULTECH</span>
+            <span className="text-[#f1bd5b]">·</span>
+            <span className="text-sky-200 font-bold">ESTD. 2014</span>
+            <span className="text-[#f1bd5b]">·</span>
+            <span className="text-[#f1bd5b] font-black">CIA® EXECUTIVE ACCELERATOR</span>
           </div>
 
           {/* Central Program Master Headline (Keeps line 1 on single unbroken line on full screen) */}
@@ -138,7 +161,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 onClick={() => onOpenCheckout('premium')}
                 className="btn-reflection inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-xs sm:text-sm text-white bg-gradient-to-r from-sky-700 via-sky-800 to-[#b58b42] hover:from-sky-800 hover:to-[#9e7735] shadow-xl shadow-sky-800/25 hover:shadow-[#b58b42]/30 transform hover:-translate-y-0.5 transition-all cursor-pointer"
               >
-                <span>Explore Packages & Enroll</span>
+                <span>Explore Packages & Enroll Now</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
 
@@ -216,8 +239,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   Speak to a Senior CIA® Counselor
                 </h3>
                 <p className="text-xs text-slate-500 mt-1 leading-relaxed">
-                  Receive syllabus roadmap, fee scholarship options & personalized eligibility advice. Responses route directly to{' '}
-                  <span className="font-semibold text-sky-900">elevate@bncglobal.in</span>.
+                  Receive syllabus roadmap, fee scholarship options & personalized eligibility advice.
                 </p>
               </div>
 
@@ -356,19 +378,19 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                       {isSubmitting ? (
                         <>
                           <Clock className="w-4 h-4 animate-spin" />
-                          <span>Routing to elevate@bncglobal.in...</span>
+                          <span>Submitting Enquiry...</span>
                         </>
                       ) : (
                         <>
                           <Send className="w-4 h-4" />
-                          <span>Submit Enquiry to elevate@bncglobal.in</span>
+                          <span>Submit Enquiry</span>
                         </>
                       )}
                     </button>
                   </div>
 
                   <p className="text-[11px] text-slate-400 text-center">
-                    Direct academic dispatch · Response sent to elevate@bncglobal.in
+                    Direct academic dispatch · Response within 2 business hours
                   </p>
                 </form>
               )}
@@ -697,20 +719,20 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 {/* 4 Quantifiable Badges with stylish glossy look */}
                 <div className="grid grid-cols-4 gap-2 mb-4 text-center">
                   <div className="p-2.5 rounded-xl bg-gradient-to-b from-sky-50 to-white border border-sky-200 shadow-2xs">
-                    <div className="text-base font-black text-sky-850 tabular-nums">21+</div>
-                    <div className="text-[9px] font-bold text-slate-600 uppercase mt-0.5">Yrs Exp</div>
+                    <div className="text-base font-black text-sky-950 tabular-nums">21+</div>
+                    <div className="text-[9px] font-bold text-slate-700 uppercase mt-0.5">Yrs Exp</div>
                   </div>
                   <div className="p-2.5 rounded-xl bg-gradient-to-b from-amber-50 to-white border border-amber-200 shadow-2xs">
                     <div className="text-base font-black text-[#b58b42]">Big 4</div>
-                    <div className="text-[9px] font-bold text-slate-600 uppercase mt-0.5">Ex-KPMG</div>
+                    <div className="text-[9px] font-bold text-slate-700 uppercase mt-0.5">Ex-KPMG</div>
                   </div>
                   <div className="p-2.5 rounded-xl bg-gradient-to-b from-sky-50 to-white border border-sky-200 shadow-2xs">
-                    <div className="text-base font-black text-sky-850">Aon</div>
-                    <div className="text-[9px] font-bold text-slate-600 uppercase mt-0.5">Ex-AVP</div>
+                    <div className="text-base font-black text-sky-950">Aon</div>
+                    <div className="text-[9px] font-bold text-slate-700 uppercase mt-0.5">Ex-AVP</div>
                   </div>
                   <div className="p-2.5 rounded-xl bg-gradient-to-b from-amber-50 to-white border border-amber-200 shadow-2xs">
                     <div className="text-base font-black text-[#b58b42]">ICAI</div>
-                    <div className="text-[9px] font-bold text-slate-600 uppercase mt-0.5">SRSB</div>
+                    <div className="text-[9px] font-bold text-slate-700 uppercase mt-0.5">SRSB</div>
                   </div>
                 </div>
 
@@ -780,7 +802,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   onClick={() => onOpenCheckout('premium')}
                   className="btn-reflection flex-1 py-3 px-3 rounded-xl bg-gradient-to-r from-sky-700 via-sky-800 to-[#b58b42] hover:from-sky-800 hover:to-[#9e7735] text-white font-bold text-xs shadow-md shadow-sky-800/25 hover:shadow-[#b58b42]/30 transition-all flex items-center justify-center gap-1.5 cursor-pointer"
                 >
-                  <span>Enroll in Live Cohort</span>
+                  <span>Enroll Now</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </button>
                 <button

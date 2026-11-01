@@ -50,17 +50,17 @@ export const EligibilityCalculator: React.FC<EligibilityCalculatorProps> = ({
               <button
                 key={path.id}
                 onClick={() => setSelectedPathwayId(path.id)}
-                className={`card-reflection p-4 rounded-2xl border text-left transition-all duration-200 cursor-pointer relative ${
+                className={`card-reflection p-4 rounded-2xl text-left transition-all duration-200 cursor-pointer relative bg-white ${
                   isSelected
-                    ? 'bg-amber-50/70 border-[#b58b42] ring-2 ring-[#b58b42]/20 shadow-sm'
-                    : 'bg-white border-sky-100 hover:border-sky-300'
+                    ? 'border-2 border-[#b58b42] ring-2 ring-[#b58b42]/25 shadow-xl -translate-y-0.5'
+                    : 'border border-slate-200 hover:border-[#b58b42]/50 shadow-md'
                 }`}
               >
-                <span className="block text-[10px] font-bold text-[#b58b42] uppercase tracking-wider mb-1">
+                <span className="block text-[10px] font-black text-[#b58b42] uppercase tracking-wider mb-1">
                   {path.badge}
                 </span>
                 <h4 className="font-bold text-slate-900 text-sm sm:text-base mb-1">{path.title}</h4>
-                <p className="text-xs text-slate-500 line-clamp-2">{path.qualification}</p>
+                <p className="text-xs text-slate-600 line-clamp-2">{path.qualification}</p>
               </button>
             );
           })}

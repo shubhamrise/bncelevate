@@ -7,6 +7,24 @@ interface FooterProps {
 }
 
 export const Footer: React.FC<FooterProps> = ({ onOpenCheckout, onOpenInquiry }) => {
+  const handleEmailRedirect = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const email = 'elevate@bncglobal.in';
+    const subject = encodeURIComponent('CIA Executive Accelerator Inquiry - BNC ELEVATE');
+    const body = encodeURIComponent('Hello BNC ELEVATE Admissions Team,\n\nI would like more information on the CIA Executive Accelerator program.\n\nName:\nPhone:\nQualification:\n');
+    
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    if (isMobile) {
+      window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+    } else {
+      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${subject}&body=${body}`;
+      const mailWindow = window.open(gmailUrl, '_blank', 'noopener,noreferrer');
+      if (!mailWindow || mailWindow.closed || typeof mailWindow.closed === 'undefined') {
+        window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+      }
+    }
+  };
+
   return (
     <footer className="relative overflow-hidden bg-slate-950 border-t border-sky-950 text-slate-400 text-xs">
       {/* Corporate Architectural Background in Footer */}
@@ -41,7 +59,12 @@ export const Footer: React.FC<FooterProps> = ({ onOpenCheckout, onOpenInquiry })
             <div className="pt-2 text-slate-300 space-y-1.5 font-medium">
               <div className="flex items-center gap-2">
                 <Mail className="w-3.5 h-3.5 text-[#b58b42]" />
-                <a href="mailto:elevate@bncglobal.in" className="hover:text-[#b58b42] transition-colors">
+                <a
+                  href="mailto:elevate@bncglobal.in?subject=CIA%20Executive%20Accelerator%20Inquiry%20-%20BNC%20ELEVATE"
+                  onClick={handleEmailRedirect}
+                  className="hover:text-[#b58b42] transition-colors cursor-pointer"
+                  title="Compose email to elevate@bncglobal.in"
+                >
                   elevate@bncglobal.in
                 </a>
               </div>

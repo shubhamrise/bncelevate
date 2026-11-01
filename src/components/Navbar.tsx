@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Currency } from '../types';
-import { Phone, ChevronRight, Menu, X, Sparkles, MessageSquare } from 'lucide-react';
+import { Phone, Mail, ChevronRight, Menu, X, Sparkles, MessageSquare } from 'lucide-react';
 
 interface NavbarProps {
   currency: Currency;
@@ -61,6 +61,25 @@ export const Navbar: React.FC<NavbarProps> = ({
     }
   };
 
+  const handleEmailRedirect = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const email = 'elevate@bncglobal.in';
+    const subject = encodeURIComponent('CIA Executive Accelerator Inquiry - BNC ELEVATE');
+    const body = encodeURIComponent('Hello BNC ELEVATE Admissions Team,\n\nI would like more information on the CIA Executive Accelerator program.\n\nName:\nPhone:\nQualification:\n');
+    
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    if (isMobile) {
+      window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+    } else {
+      // Directly open Gmail web compose in a new tab
+      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${subject}&body=${body}`;
+      const mailWindow = window.open(gmailUrl, '_blank', 'noopener,noreferrer');
+      if (!mailWindow || mailWindow.closed || typeof mailWindow.closed === 'undefined') {
+        window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+      }
+    }
+  };
+
   return (
     <>
       {/* Top Professional Notice Bar - Solid Deep Corporate Navy with razor-sharp contrast */}
@@ -81,7 +100,17 @@ export const Navbar: React.FC<NavbarProps> = ({
               View Fee Chart
             </button>
           </div>
-          <div className="hidden md:flex items-center gap-4 text-slate-100 font-medium">
+          <div className="hidden md:flex items-center gap-3.5 text-slate-100 font-medium">
+            <a
+              href="mailto:elevate@bncglobal.in?subject=CIA%20Executive%20Accelerator%20Inquiry%20-%20BNC%20ELEVATE"
+              onClick={handleEmailRedirect}
+              className="flex items-center gap-1.5 hover:text-[#f3bc53] transition-colors cursor-pointer"
+              title="Compose email to elevate@bncglobal.in"
+            >
+              <Mail className="w-3.5 h-3.5 text-[#f3bc53]" />
+              <span className="font-semibold tracking-wide">elevate@bncglobal.in</span>
+            </a>
+            <span className="text-slate-600">|</span>
             <a href="tel:+919810575613" className="flex items-center gap-1.5 hover:text-[#f3bc53] transition-colors">
               <Phone className="w-3.5 h-3.5 text-[#f3bc53]" />
               <span className="font-semibold tracking-wide">+91 98105 75613</span>
@@ -172,7 +201,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 onClick={() => onOpenCheckout()}
                 className="btn-reflection inline-flex items-center gap-2 px-5 py-2.5 text-xs sm:text-sm font-bold text-white bg-gradient-to-r from-sky-700 via-sky-800 to-[#b58b42] hover:from-sky-800 hover:to-[#9e7735] rounded-xl shadow-md shadow-sky-800/25 hover:shadow-[#b58b42]/30 transform hover:-translate-y-0.5 transition-all duration-200 cursor-pointer whitespace-nowrap"
               >
-                <span>Enroll in Batch</span>
+                <span>Enroll Now</span>
                 <ChevronRight className="w-4 h-4" />
               </button>
             </div>
@@ -222,7 +251,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <button
                   key={link.id}
                   onClick={() => scrollTo(link.id)}
-                  className="flex items-center justify-between w-full px-4 py-3 rounded-lg text-left text-sm font-semibold text-slate-700 hover:bg-sky-50 hover:text-sky-850 transition-colors"
+                  className="flex items-center justify-between w-full px-4 py-3 rounded-lg text-left text-sm font-semibold text-slate-700 hover:bg-sky-50 hover:text-sky-950 transition-colors"
                 >
                   <span>{link.label}</span>
                   <ChevronRight className="w-4 h-4 text-amber-500" />
@@ -238,7 +267,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 }}
                 className="btn-reflection w-full flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-bold bg-gradient-to-r from-sky-700 via-sky-800 to-[#b58b42] text-white shadow-md shadow-sky-800/25"
               >
-                <span>Purchase / Enroll Now</span>
+                <span>Enroll Now</span>
                 <ChevronRight className="w-4 h-4" />
               </button>
               <button
@@ -251,6 +280,21 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <Sparkles className="w-4 h-4 text-[#b58b42]" />
                 <span>Ask AI Advisor</span>
               </button>
+
+              <div className="pt-2 border-t border-slate-100 flex flex-col gap-1.5 text-xs text-slate-600 px-1">
+                <a
+                  href="mailto:elevate@bncglobal.in?subject=CIA%20Executive%20Accelerator%20Inquiry%20-%20BNC%20ELEVATE"
+                  onClick={handleEmailRedirect}
+                  className="flex items-center gap-2 py-1 text-slate-700 hover:text-[#b58b42] cursor-pointer"
+                >
+                  <Mail className="w-3.5 h-3.5 text-[#b58b42]" />
+                  <span className="font-semibold">elevate@bncglobal.in</span>
+                </a>
+                <a href="tel:+919810575613" className="flex items-center gap-2 py-1 text-slate-700 hover:text-[#b58b42]">
+                  <Phone className="w-3.5 h-3.5 text-[#b58b42]" />
+                  <span className="font-semibold">+91 98105 75613</span>
+                </a>
+              </div>
             </div>
           </div>
         )}

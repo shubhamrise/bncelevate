@@ -55,7 +55,7 @@ export const PackagesSection: React.FC<PackagesSectionProps> = ({
                   : 'text-slate-300 hover:text-white'
               }`}
             >
-              Full Payment (Instant LMS)
+              Standard Enrollment (Full LMS)
             </button>
             <button
               onClick={() => setBillingPlan('installment')}
@@ -65,9 +65,9 @@ export const PackagesSection: React.FC<PackagesSectionProps> = ({
                   : 'text-slate-300 hover:text-white'
               }`}
             >
-              <span>2-Part No-Cost EMI</span>
+              <span>2-Part Installment Plan</span>
               <span className="px-1.5 py-0.5 rounded text-[10px] bg-amber-400/20 text-[#f1bd5b] border border-[#f1bd5b]/40 font-bold">
-                0% Interest
+                0% Fee
               </span>
             </button>
           </div>
@@ -168,11 +168,11 @@ export const PackagesSection: React.FC<PackagesSectionProps> = ({
                         : 'bg-sky-100/70 hover:bg-sky-200/70 text-sky-950 border border-sky-300 hover:border-sky-400'
                     }`}
                   >
-                    <span>Purchase & Enroll Now</span>
+                    <span>Enroll Now</span>
                     <ArrowRight className="w-4 h-4" />
                   </button>
                   <p className="text-[10px] text-slate-400 text-center mt-2">
-                    Instant LMS portal access setup upon payment confirmation
+                    Instant LMS portal access setup upon admissions confirmation
                   </p>
                 </div>
               </motion.div>
