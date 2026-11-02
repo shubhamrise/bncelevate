@@ -138,9 +138,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
           {/* Central Program Master Headline (Keeps line 1 on single unbroken line on full screen) */}
           <h1 className="text-2xl sm:text-3xl md:text-[2.25rem] lg:text-[2.85rem] xl:text-[3.15rem] font-black text-white tracking-tight leading-[1.22] mb-4 text-center">
-            <span className="block md:whitespace-nowrap text-white">Master Internal Audit with BNC ELEVATE.</span>
-            <span className="block my-1.5 text-[#f1bd5b] font-black drop-shadow-[0_2px_12px_rgba(241,189,91,0.35)]">Certify the CIA®.</span>
-            <span className="block md:whitespace-nowrap text-slate-100">Lead Enterprise Governance Globally.</span>
+            <span className="block md:whitespace-nowrap text-white">Master Internal Audit with BNC ELEVATE</span>
+            <span className="block my-2 text-[#f1bd5b] font-black drop-shadow-[0_2px_12px_rgba(241,189,91,0.35)]">Become a CIA</span>
+            <span className="block md:whitespace-nowrap text-slate-100">Lead Enterprise Governance Globally</span>
           </h1>
 
           {/* Master Program Subtext */}
